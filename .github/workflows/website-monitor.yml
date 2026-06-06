@@ -1,0 +1,21 @@
+name: InventIMS Website Monitor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Test Email
+        run: |
+          curl -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "onboarding@resend.dev",
+              "to": ["YOUR_EMAIL@gmail.com"],
+              "subject": "InventIMS Monitor Test",
+              "html": "<h2>Monitoring setup successful 🚀</h2>"
+            }'

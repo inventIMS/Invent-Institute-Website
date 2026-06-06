@@ -14,8 +14,8 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "from": "onboarding@resend.dev",
+              "from": "alerts@inventiims.in",
               "to": ["inventims.students@gmail.com"],
-              "subject": "🚨 InventIMS Test Alert",
-              "html": "<h2>This is a test alert from GitHub Actions</h2><p>If you received this email, Resend is working correctly.</p>"
+              "subject": "🚀 InventIMS Monitoring Started",
+              "html": "<h2>Monitoring setup successful 🚀</h2><p>Domain verification is working.</p>"
             }'

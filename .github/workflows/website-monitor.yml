@@ -10,12 +10,14 @@ jobs:
     steps:
       - name: Send Test Alert
         run: |
-          curl -X POST https://api.resend.com/emails \
+          RESPONSE=$(curl -s -X POST https://api.resend.com/emails \
             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
               "from": "alerts@inventiims.in",
               "to": ["inventims.students@gmail.com"],
-              "subject": "🚀 InventIMS Monitoring Started",
-              "html": "<h2>Monitoring setup successful 🚀</h2><p>Domain verification is working.</p>"
-            }'
+              "subject": "InventIMS Monitor Test",
+              "html": "<h2>Monitoring is working 🚀</h2>"
+            }')
+
+          echo "$RESPONSE"

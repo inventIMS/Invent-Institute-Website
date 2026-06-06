@@ -1,6 +1,8 @@
 name: InventIMS Website Monitor
 
 on:
+  schedule:
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -8,14 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send Test Alert
+      - name: Check Website Status
         run: |
-          curl -X POST https://api.resend.com/emails \
-            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "from": "onboarding@resend.dev",
-              "to": ["YOUR_EMAIL@gmail.com"],
-              "subject": "🚨 InventIMS Test Alert",
-              "html": "<h2>This is a test alert from GitHub Actions</h2><p>If you received this email, Resend is working correctly.</p>"
-            }'
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://inventiims.in || echo "000")
+
+          echo "Status Code: $STATUS"
+
+          if [ "$STATUS" != "200" ]; then
+
+            RESPONSE=$(curl -s -X POST https://api.resend.com/emails \
+              -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "from": "alerts@inventiims.in",
+                "to": ["${{ secrets.ALERT_EMAIL }}"],
+                "subject": "🚨 InventIMS Website Down",
+                "html": "<h2>Website Down Alert</h2><p>https://inventiims.in is not responding.</p>"
+              }')
+
+            echo "$RESPONSE"
+
+          else
+            echo "Website is healthy"
+          fi

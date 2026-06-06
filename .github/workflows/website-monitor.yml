@@ -8,18 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check InventIMS Website
-        run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://inventiimsajdhcbdhc.in)
-
-          echo "Status Code: $STATUS"
-
-          if [ "$STATUS" != "200" ]; then
-            echo "WEBSITE_DOWN=true" >> $GITHUB_ENV
-          fi
-
-      - name: Send Alert Email
-        if: env.WEBSITE_DOWN == 'true'
+      - name: Send Test Alert
         run: |
           curl -X POST https://api.resend.com/emails \
             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
@@ -27,11 +16,6 @@ jobs:
             -d '{
               "from": "onboarding@resend.dev",
               "to": ["YOUR_EMAIL@gmail.com"],
-              "subject": "🚨 InventIMS Website Down",
-              "html": "
-              <h2>Website Health Alert</h2>
-              <p>Website: https://inventiims.in</p>
-              <p>Status: DOWN</p>
-              <p>The website is not responding with HTTP 200.</p>
-              "
+              "subject": "🚨 InventIMS Test Alert",
+              "html": "<h2>This is a test alert from GitHub Actions</h2><p>If you received this email, Resend is working correctly.</p>"
             }'

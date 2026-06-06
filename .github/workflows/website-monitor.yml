@@ -15,7 +15,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "from": "onboarding@resend.dev",
-              "to": ["adityajai243@gmail.com"],
+              "to": ["inventims.students@gmail.com"],
               "subject": "🚨 InventIMS Test Alert",
               "html": "<h2>This is a test alert from GitHub Actions</h2><p>If you received this email, Resend is working correctly.</p>"
             }'

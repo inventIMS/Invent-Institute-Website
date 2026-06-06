@@ -1,0 +1,93 @@
+﻿# IIMS — Invent Institute of Mathematics & Science
+
+Official website for **Invent Institute of Mathematics & Science (IIMS)**, built with Next.js 16, React 19, and Tailwind CSS v4. The site showcases the institute's academics, vision, courses, and contact information.
+
+---
+
+## Pages
+
+| Route | Description |
+|---|---|
+| `/` | Home — hero, stats, key features, and institute highlights |
+| `/about` | About — origin story, vision, faculty, and student life |
+| `/academics` | Academics — courses offered and platform features |
+| `/contact` | Contact — address, phone, and inquiry form |
+
+---
+
+## Features
+
+- **Animated particle background** across all pages
+- **Smart navbar** — hides on scroll down, reappears on scroll up or mouse hover near top
+- **Scroll reveal animations** (up, down, left, right, scale) using `IntersectionObserver`
+- **Responsive design** — mobile-first with Tailwind CSS
+- **Custom IIMS logo** component
+- Courses from Std. 7 to UG level including Computer Science streams
+
+---
+
+## Tech Stack
+
+| Technology | Version |
+|---|---|
+| Next.js | 16.2.3 |
+| React | 19.2.4 |
+| TypeScript | ^5 |
+| Tailwind CSS | ^4 |
+| PostCSS | ^8 |
+
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+```bash
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Lint
+npm run lint
+```
+
+---
+
+## Project Structure
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx              # Root layout (Navbar, Footer, ParticleBackground)
+│   ├── page.tsx                # Home page
+│   ├── about/page.tsx          # About page
+│   ├── academics/page.tsx      # Academics page
+│   ├── contact/page.tsx        # Contact page
+│   ├── globals.css             # Global styles & reveal animations
+│   └── components/
+│       ├── Navbar.tsx              # Floating pill navbar with scroll behaviour
+│       ├── Footer.tsx              # Footer with address & copyright
+│       ├── IIMSLogo.tsx            # SVG logo component
+│       └── ParticleBackground.tsx  # Animated canvas particles
+└── public/                     # Static assets (images, icons)
+```
+
+---
+
+## Contact
+
+**Invent Institute of Mathematics & Science**
+560, White House, 40 Feet Road, Arul Nagar, Nandhivaram,
+Guduvanchery, Chengalpet District, Tamilnadu — 603202
+
+_Powered and Managed by the IT Department of IIMS_

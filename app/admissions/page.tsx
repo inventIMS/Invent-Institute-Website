@@ -152,6 +152,43 @@ export default function AdmissionsPage() {
     setFormResetKey((current) => current + 1);
   };
 
+  const getActiveGroupSelections = () => {
+    if (groupSelection === groupOptions[0]) {
+      return group1Selected;
+    }
+
+    if (groupSelection === groupOptions[1]) {
+      return group2Selected;
+    }
+
+    if (groupSelection === groupOptions[2]) {
+      return group3Selected;
+    }
+
+    return [];
+  };
+
+  const activeGroupSelections = getActiveGroupSelections();
+
+  const progressChecks = [
+    studentName.trim().length > 0,
+    dob.length > 0,
+    gender.length > 0,
+    board.length > 0,
+    board !== "Other" || boardOther.trim().length > 0,
+    category.length > 0,
+    category !== "Class 7–10" || class7To10Selected.length > 0,
+    category !== "Class 11–12" || groupSelection.length > 0,
+    category !== "Class 11–12" || activeGroupSelections.length > 0,
+    category !== "UG Courses" || ugSelected.length > 0,
+    weekendBatch.length > 0,
+    introducer.length > 0,
+    introducer !== "Other" || introducerOther.trim().length > 0,
+  ];
+  const progressPercentage = Math.round(
+    (progressChecks.filter(Boolean).length / progressChecks.length) * 100,
+  );
+
   useEffect(() => {
     if (!toastMessage) return;
 
@@ -222,14 +259,7 @@ export default function AdmissionsPage() {
         return;
       }
 
-      const activeGroupSelections =
-        groupSelection === groupOptions[0]
-          ? group1Selected
-          : groupSelection === groupOptions[1]
-            ? group2Selected
-            : groupSelection === groupOptions[2]
-              ? group3Selected
-              : [];
+      const activeGroupSelections = getActiveGroupSelections();
 
       if (activeGroupSelections.length === 0) {
         setStatusMessage({
@@ -640,6 +670,25 @@ export default function AdmissionsPage() {
                   className="mt-3 w-full rounded-xl border border-emerald-200 bg-emerald-50/40 px-5 py-4 text-sm text-slate-800 outline-none transition-all focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/20"
                 />
               ) : null}
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-end text-[11px] font-semibold text-emerald-900/70">
+                <span>{progressPercentage}%</span>
+              </div>
+              <div
+                className="h-1.5 overflow-hidden rounded-full bg-emerald-100"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={progressPercentage}
+                aria-label="Admission form completion progress"
+              >
+                <div
+                  className="h-full rounded-full bg-linear-to-r from-emerald-500 via-emerald-600 to-emerald-700 transition-all duration-300"
+                  style={{ width: `${progressPercentage}%` }}
+                />
+              </div>
             </div>
 
             <button

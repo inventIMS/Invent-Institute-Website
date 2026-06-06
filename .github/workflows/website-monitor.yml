@@ -2,7 +2,7 @@ name: InventIMS Website Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *" # Every 5 minutes
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -11,24 +11,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
+    env:
+      ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+
     steps:
       - name: Check InventIMS Website Availability
         run: |
-          STATUS="500"
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://inventiims.in || echo "000")
 
           echo "Status Code: $STATUS"
 
           if [ "$STATUS" != "200" ]; then
 
+            EMAILS=$(echo "$ALERT_EMAIL" | sed 's/,/","/g')
+
             RESPONSE=$(curl -s -X POST https://api.resend.com/emails \
               -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
               -H "Content-Type: application/json" \
-              -d '{
-                "from": "alerts@inventiims.in",
-                "to": ["${{ secrets.ALERT_EMAIL }}"],
-                "subject": "🚨 InventIMS Website Down",
-                "html": "<h2>🚨 Website Availability Alert</h2><p>The InventIMS website is currently unreachable or not responding with HTTP 200.</p><p><strong>Website:</strong> https://inventiims.in</p><p><strong>Status:</strong> DOWN</p><p><strong>Checked By:</strong> GitHub Actions Monitoring Service</p><hr><p style=\"font-size:12px;color:#666;\">This is an automatically generated alert from the InventIMS Monitoring Service.<br><strong>Please do not reply to this email.</strong><br>If you received this alert, please verify the website status and investigate the issue.</p>"
-              }')
+              -d "{
+                \"from\": \"alerts@inventiims.in\",
+                \"to\": [\"$EMAILS\"],
+                \"subject\": \"🚨 InventIMS Website Down\",
+                \"html\": \"<h2>🚨 Website Availability Alert</h2><p>The InventIMS website is currently unreachable or not responding with HTTP 200.</p><p><strong>Website:</strong> https://inventiims.in</p><p><strong>Status:</strong> DOWN</p><p><strong>Checked By:</strong> GitHub Actions Monitoring Service</p><hr><p style='font-size:12px;color:#666;'>This is an automatically generated alert from the InventIMS Monitoring Service.<br><strong>Please do not reply to this email.</strong><br>If you received this alert, please verify the website status and investigate the issue.</p>\"
+              }")
 
             echo "$RESPONSE"
 

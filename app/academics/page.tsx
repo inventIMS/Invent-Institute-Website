@@ -5,7 +5,7 @@ import ScrollRevealWrapper from "../components/ScrollRevealWrapper";
 export default function AcademicsPage() {
   const courseCategories = [
     // {
-    //   id: "school",
+  
     //   label: "School Subjects",
     //   level: "Foundation Track",
     //   board: "SCERT, NCERT, IGCSE",

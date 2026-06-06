@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Check InventIMS Website Availability
         run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://inventiims.in || echo "000")
+          STATUS="500"
 
           echo "Status Code: $STATUS"
 

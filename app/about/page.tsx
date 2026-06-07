@@ -75,34 +75,6 @@ export default function AboutPage() {
               </div>
             </section>
 
-            {/* Section 2: Founder & CEO
-          <section className="flex flex-col items-center gap-8 sm:gap-12 lg:flex-row">
-            <div className="reveal-right relative w-full lg:w-1/2">
-              <div className="absolute -inset-4 rounded-3xl bg-emerald-100/35 blur-xl"></div>
-              <Image
-                src="/founder.jpg"
-                alt="Founder and Head Professor of IIMS"
-                width={1200}
-                height={350}
-                className="relative z-10 h-87.5 w-full rounded-2xl object-cover shadow-2xl"
-              />
-            </div>
-            <div className="reveal-left w-full lg:w-1/2 text-center lg:text-left">
-              <h2 className="mb-6 text-2xl font-black uppercase tracking-widest text-emerald-800">About Our Founder &amp; Head Professor</h2>
-              <div className="flex flex-col gap-4 text-justify text-sm leading-relaxed text-slate-600 sm:text-base">
-                <p>
-                  Our Founder &amp; Head Professor, Mr. K Gowrishankar, envisioned Invent Institute of Mathematics &amp; Science as a place where every learner receives personal guidance, strong fundamentals, and confidence to achieve excellence.
-                </p>
-                <p>
-                  With a student-first philosophy and years of academic mentoring experience, the leadership continues to shape our programs with discipline, care, and innovation.
-                </p>
-                <p>
-                  Under this vision, IIMS has grown into a trusted learning community that supports students in board exams, competitive preparation, and long-term career success.
-                </p>
-              </div>
-            </div>
-          </section> */}
-
             {/* Section 2: What We Offer */}
             <section className="flex flex-col-reverse items-center gap-8 sm:gap-12 lg:flex-row">
               <div className="reveal-right w-full lg:w-1/2 text-center lg:text-left">

@@ -151,7 +151,7 @@ export default function Home() {
             >
               <Link
                 href="/academics"
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl bg-emerald-600 px-8 py-4 text-sm font-bold text-white shadow-premium transition-all hover:scale-105 hover:bg-emerald-500 hover:shadow-premium-hover active:scale-95 sm:w-auto"
+                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl bg-emerald-600 px-8 py-4 text-sm font-bold text-white shadow-premium transition-all hover:bg-emerald-500 hover:shadow-premium-hover sm:w-auto"
               >
                 <div className="absolute inset-0 flex h-full w-full justify-center transform-[skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:transform-[skew(-12deg)_translateX(100%)]">
                   <div className="relative h-full w-8 bg-white/20" />
@@ -160,7 +160,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex w-full items-center justify-center rounded-2xl border-2 border-emerald-200 bg-white/70 px-8 py-4 text-sm font-bold text-slate-700 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-emerald-500 hover:bg-white hover:text-emerald-700 hover:shadow-premium sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-2xl border-2 border-emerald-200 bg-white/70 px-8 py-4 text-sm font-bold text-slate-700 backdrop-blur-md transition-all hover:border-emerald-500 hover:bg-white hover:text-emerald-700 hover:shadow-premium sm:w-auto"
               >
                 Contact Us
               </Link>
@@ -182,7 +182,7 @@ export default function Home() {
                   sizes="(max-width: 1024px) 100vw, 512px"
                   priority
                   placeholder="blur"
-                  className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                  className="object-cover object-center transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/70 via-slate-900/10 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
@@ -208,7 +208,7 @@ export default function Home() {
                     aria-label={`Go to ${s.label}`}
                   >
                     <div className="group flex flex-col items-center py-4 transition-all duration-300 hover:bg-emerald-50/70">
-                      <span className="text-xl transition-transform duration-300 group-hover:scale-125">
+                      <span className="text-xl transition-transform duration-300">
                         {s.icon}
                       </span>
                       <span className="mt-1 text-base font-black text-slate-900">
@@ -303,12 +303,10 @@ export default function Home() {
             {/* Card 1 — Test for Excellence */}
             <div className="reveal-left group relative overflow-hidden border-b border-r border-emerald-100 bg-white p-5 transition-all duration-500 hover:bg-emerald-50/30 sm:p-10">
               {/* animated left-border accent */}
-              <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300 transition-transform duration-500 group-hover:scale-y-100" />
-              {/* subtle glow */}
-              <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="absolute left-0 top-0 h-full w-1 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300" />
               <div className="relative z-10">
                 <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white"
                   style={{ boxShadow: "0 4px 14px rgba(34,197,94,0.15)" }}
                 >
                   {features[0].icon}
@@ -331,11 +329,10 @@ export default function Home() {
               className="reveal-right group relative overflow-hidden border-b border-emerald-100 bg-white p-5 transition-all duration-500 hover:bg-emerald-50/30 sm:p-10"
               style={{ transitionDelay: "80ms" }}
             >
-              <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300 transition-transform duration-500 group-hover:scale-y-100" />
-              <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="absolute left-0 top-0 h-full w-1 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300" />
               <div className="relative z-10">
                 <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white"
                   style={{ boxShadow: "0 4px 14px rgba(34,197,94,0.15)" }}
                 >
                   {features[1].icon}
@@ -358,11 +355,10 @@ export default function Home() {
               className="reveal-left group relative overflow-hidden border-r border-emerald-100 bg-white p-5 transition-all duration-500 hover:bg-emerald-50/30 sm:p-10"
               style={{ transitionDelay: "160ms" }}
             >
-              <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300 transition-transform duration-500 group-hover:scale-y-100" />
-              <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="absolute left-0 top-0 h-full w-1 rounded-r bg-linear-to-b from-emerald-500 to-emerald-300" />
               <div className="relative z-10">
                 <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white"
                   style={{ boxShadow: "0 4px 14px rgba(34,197,94,0.15)" }}
                 >
                   {features[2].icon}
@@ -386,12 +382,12 @@ export default function Home() {
               style={{ transitionDelay: "240ms" }}
             >
               {/* Decorative rings */}
-              <div className="pointer-events-none absolute -right-10 -bottom-10 h-48 w-48 rounded-full border border-white/10 transition-all duration-700 group-hover:scale-110" />
-              <div className="pointer-events-none absolute -right-4 -bottom-4 h-28 w-28 rounded-full border border-white/10 transition-all duration-700 group-hover:scale-125" />
+              <div className="pointer-events-none absolute -right-10 -bottom-10 h-48 w-48 rounded-full border border-white/10 transition-all duration-300" />
+              <div className="pointer-events-none absolute -right-4 -bottom-4 h-28 w-28 rounded-full border border-white/10 transition-all duration-300" />
               <div className="pointer-events-none absolute right-10 bottom-10 h-10 w-10 rounded-full bg-white/5" />
               <div className="relative z-10">
                 <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white transition-all duration-400 group-hover:scale-110 group-hover:bg-white/25"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white transition-all duration-300 group-hover:bg-white/25"
                   style={{ boxShadow: "0 4px 14px rgba(0,0,0,0.25)" }}
                 >
                   {features[3].icon}
@@ -469,7 +465,7 @@ export default function Home() {
             </p>
             <Link
               href="/admissions"
-              className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-emerald-600 px-8 py-3.5 text-sm font-bold text-white shadow-[0_0_30px_rgba(34,197,94,0.18)] transition-all duration-300 hover:scale-105 hover:bg-emerald-500 hover:shadow-[0_0_50px_rgba(34,197,94,0.25)]"
+              className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-emerald-600 px-8 py-3.5 text-sm font-bold text-white shadow-[0_0_30px_rgba(34,197,94,0.18)] transition-all duration-300 hover:bg-emerald-500 hover:shadow-[0_0_50px_rgba(34,197,94,0.25)]"
             >
               Apply Now
               <svg

@@ -1,7 +1,8 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const admissionsSubmitUrl = "/api/admissions";
 const genderOptions = ["Male", "Female", "Prefer not to say"] as const;
@@ -58,7 +59,7 @@ function RequiredLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function AdmissionsPage() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useScrollReveal();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formResetKey, setFormResetKey] = useState(0);
   const [toastMessage, setToastMessage] = useState<{
@@ -72,11 +73,12 @@ export default function AdmissionsPage() {
 
   const [studentName, setStudentName] = useState("");
   const [dob, setDob] = useState("");
-  const [gender, setGender] = useState<(typeof genderOptions)[number] | "">("")
-  const [board, setBoard] = useState<(typeof boardOptions)[number] | "">("")
+  const [gender, setGender] = useState<(typeof genderOptions)[number] | "">("");
+  const [board, setBoard] = useState<(typeof boardOptions)[number] | "">("");
   const [boardOther, setBoardOther] = useState("");
-  const [category, setCategory] =
-    useState<(typeof categoryOptions)[number] | "">("")
+  const [category, setCategory] = useState<
+    (typeof categoryOptions)[number] | ""
+  >("");
   const [groupSelection, setGroupSelection] = useState<
     (typeof groupOptions)[number] | ""
   >("");
@@ -85,34 +87,13 @@ export default function AdmissionsPage() {
   const [group2Selected, setGroup2Selected] = useState<string[]>([]);
   const [group3Selected, setGroup3Selected] = useState<string[]>([]);
   const [ugSelected, setUgSelected] = useState<string[]>([]);
-  const [weekendBatch, setWeekendBatch] =
-    useState<(typeof weekendOptions)[number] | "">("")
-  const [introducer, setIntroducer] =
-    useState<(typeof introducerOptions)[number] | "">("")
+  const [weekendBatch, setWeekendBatch] = useState<
+    (typeof weekendOptions)[number] | ""
+  >("");
+  const [introducer, setIntroducer] = useState<
+    (typeof introducerOptions)[number] | ""
+  >("");
   const [introducerOther, setIntroducerOther] = useState("");
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const targets = el.querySelectorAll(
-      ".reveal-up, .reveal-left, .reveal-right",
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
-
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
-  }, []);
 
   const resetBranchState = (nextCategory: (typeof categoryOptions)[number]) => {
     if (nextCategory !== "Class 11–12") {
@@ -415,8 +396,9 @@ export default function AdmissionsPage() {
               <select
                 value={board}
                 onChange={(event) => {
-                  const nextBoard = event.target
-                    .value as (typeof boardOptions)[number] | "";
+                  const nextBoard = event.target.value as
+                    | (typeof boardOptions)[number]
+                    | "";
                   setBoard(nextBoard);
                   if (nextBoard !== "Other") {
                     setBoardOther("");
@@ -448,11 +430,14 @@ export default function AdmissionsPage() {
               <select
                 value={category}
                 onChange={(event) => {
-                  const nextCategory = event.target
-                    .value as (typeof categoryOptions)[number] | "";
+                  const nextCategory = event.target.value as
+                    | (typeof categoryOptions)[number]
+                    | "";
                   setCategory(nextCategory);
                   if (nextCategory) {
-                    resetBranchState(nextCategory as (typeof categoryOptions)[number]);
+                    resetBranchState(
+                      nextCategory as (typeof categoryOptions)[number],
+                    );
                   }
                 }}
                 className="w-full rounded-xl border border-emerald-200 bg-emerald-50/40 px-5 py-4 text-sm text-slate-800 outline-none transition-all focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/20"

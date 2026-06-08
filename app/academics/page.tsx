@@ -161,7 +161,7 @@ export default function AcademicsPage() {
                 {courseCategories.map((category, idx) => (
                   <div
                     key={category.id}
-                    className="reveal-left rounded-3xl border border-emerald-100 bg-white p-6 shadow-premium transition-transform duration-300 hover:-translate-y-1"
+                    className="reveal-left rounded-3xl border border-emerald-100 bg-white p-6 shadow-premium transition-all duration-300"
                     style={{ transitionDelay: `${idx * 80}ms` }}
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2">
@@ -219,7 +219,7 @@ export default function AcademicsPage() {
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="reveal-up group flex flex-col overflow-hidden rounded-3xl bg-white border-2 border-emerald-100 hover:border-emerald-400 transition-all duration-500 hover:-translate-y-2"
+                className="reveal-up group flex flex-col overflow-hidden rounded-3xl bg-white border-2 border-emerald-100 hover:border-emerald-400 transition-all duration-300"
                 style={{
                   boxShadow:
                     "0 8px 30px -4px rgba(34,197,94,0.16), 0 4px 12px -2px rgba(0,0,0,0.08)",
@@ -240,7 +240,7 @@ export default function AcademicsPage() {
                     alt={feature.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-emerald-900/10 mix-blend-multiply opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>

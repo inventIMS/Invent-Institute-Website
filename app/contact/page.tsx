@@ -1,36 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-function useScrollReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const selectors = [
-      ".reveal-up",
-      ".reveal-down",
-      ".reveal-left",
-      ".reveal-right",
-      ".reveal-scale",
-    ];
-    const targets = el.querySelectorAll(selectors.join(", "));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
-    targets.forEach((t) => observer.observe(t));
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
+import { useState } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 

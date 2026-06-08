@@ -140,7 +140,12 @@ export async function POST(request: Request) {
     }
 
     params.set("entry.1844833698", weekendBatch);
-    params.set("entry.252468226", introducer === "Other" ? "Others" : introducer);
+    if (introducer === "Other") {
+      params.set("entry.252468226", "__other_option__");
+      params.set("entry.252468226.other_option_response", introducerOther || "Other");
+    } else {
+      params.set("entry.252468226", introducer);
+    }
 
     params.set("fvv", tokens.fvv);
     params.set("pageHistory", "0,1,2,3,4,5,6,7");

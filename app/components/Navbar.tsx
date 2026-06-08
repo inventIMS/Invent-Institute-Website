@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import IIMSLogo from "./IIMSLogo";
@@ -12,6 +12,18 @@ const navLinks = [
   { label: `Admissions (${new Date().getFullYear()})`, href: "/admissions" },
   { label: "Contact", href: "/contact" },
 ];
+
+// Throttle helper to limit function calls
+function throttle(fn: Function, delay: number) {
+  let lastCall = 0;
+  return function (...args: any[]) {
+    const now = Date.now();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      fn(...args);
+    }
+  };
+}
 
 interface NavLinkItemProps {
   href: string;
@@ -72,6 +84,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const throttledScrollRef = useRef<ReturnType<typeof throttle> | null>(null);
+  const throttledMouseMoveRef = useRef<ReturnType<typeof throttle> | null>(
+    null,
+  );
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -81,33 +97,40 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+    const handleScroll = (currentScrollY: number) => {
       setScrolled(currentScrollY > 20);
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
         setVisible(false);
       } else {
-        // Scrolling up
         setVisible(true);
       }
       setLastScrollY(currentScrollY);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Show navbar if mouse is in the top 80px of the screen
       if (e.clientY < 80) {
         setVisible(true);
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("mousemove", handleMouseMove);
+    // Create throttled versions (throttle to 60ms = ~16.67fps)
+    throttledScrollRef.current = throttle(
+      () => handleScroll(window.scrollY),
+      60,
+    );
+    throttledMouseMoveRef.current = throttle(handleMouseMove, 100);
+
+    const scrollListener = () => throttledScrollRef.current?.();
+    const mouseMoveListener = (e: MouseEvent) =>
+      throttledMouseMoveRef.current?.(e);
+
+    window.addEventListener("scroll", scrollListener, { passive: true });
+    window.addEventListener("mousemove", mouseMoveListener, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", scrollListener);
+      window.removeEventListener("mousemove", mouseMoveListener);
     };
   }, [lastScrollY]);
 
